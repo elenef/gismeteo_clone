@@ -7,7 +7,7 @@ export class ApiEndpoints {
         return environment.apiUrl;
     }
 
-    static todos(): ApiEndpoint {
-        return new BasicApiEndpoint(`${ApiEndpoints.baseUrl}/todos`);
+    static weather(): ApiEndpoint {
+        return new BasicApiEndpoint(`${ApiEndpoints.baseUrl}/weather.ashx`);
     }
 }

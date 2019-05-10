@@ -2,18 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import { AngularSlickgridModule } from 'angular-slickgrid';
+import { TranslateModule } from '@ngx-translate/core';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import { WeatherDataTableComponent } from './weather-data-table/weather-data-table.component';
-
-import { AngularSlickgridModule } from 'angular-slickgrid';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-
-
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
+import { ApiService } from './api/api.service';
+import { BasicApiService } from './api/basic-api.service';
 
 @NgModule({
   declarations: [
@@ -25,15 +21,10 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     HttpClientModule,
     AngularSlickgridModule.forRoot(),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-      }
-    }),
+    TranslateModule.forRoot(),
   ],
   providers: [
+    { provide: ApiService, useClass: BasicApiService },
   ],
   bootstrap: [AppComponent]
 })

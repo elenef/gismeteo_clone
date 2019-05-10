@@ -92,8 +92,8 @@ export class BasicApiService implements ApiService {
 
   private get headers(): HttpHeaders {
     return new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'authorization-mock'
+      //'Content-Type': 'application/json',
+      //Authorization: 'authorization-mock'
     });
   }
 

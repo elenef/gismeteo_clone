@@ -1,4 +1,3 @@
-import { ErrorRes } from './contracts/error-response';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpParams, HttpErrorResponse } from '@angular/common/http';
