@@ -1,4 +1,5 @@
-export interface WeatherDataset {
+
+export interface WeatherData {
     id: number;
     date: Date;
     temperature: number;

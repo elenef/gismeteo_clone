@@ -8,14 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { WeatherDataTableComponent } from './weather-data-table/weather-data-table.component';
 import { ApiService } from './api/api.service';
 import { BasicApiService } from './api/basic-api.service';
+import { WeatherTableComponent } from './weather-table/weather-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WeatherDataTableComponent
+    WeatherTableComponent
   ],
   imports: [
     BrowserModule,

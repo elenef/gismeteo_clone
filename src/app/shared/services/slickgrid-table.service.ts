@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
 import { Column, GridOption } from 'angular-slickgrid';
 
-export interface SlickgridTableService<T> {
+export interface SlickgridTableService<T, TParams> {
     columns: Column[];
     config: GridOption;
 
-    getDataset(): Observable<T[] | object>;
+    getDataset(params?: TParams): Observable<T[] | object>;
 }
