@@ -1,6 +1,6 @@
 export interface WeatherDataset {
     id: number;
-    date: string;
+    date: Date;
     temperature: number;
     humidity: number;
     pressure: number;

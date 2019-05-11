@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Column, GridOption } from 'angular-slickgrid';
 import { WeatherDataTableService } from './weather-data-table.service';
 import { WeatherDataset } from '../shared/models/slickgrid/weather-dataset';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-weather-data-table',

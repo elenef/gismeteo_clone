@@ -1,14 +1,15 @@
-import { WeatherResponse, Data, WeatherElement } from './../api/contracts/weather-response';
+import { WeatherResponse, WeatherElement } from './../api/contracts/weather-response';
 import { Injectable } from '@angular/core';
 import { ApiService } from '../api/api.service';
 import { HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ApiEndpoints } from '../api/api-endpoints';
 import { Observable } from 'rxjs';
-import { FieldType, Column, GridOption } from 'angular-slickgrid';
+import { Column, GridOption } from 'angular-slickgrid';
 import { SlickgridTableService } from '../shared/services/slickgrid-table.service';
 import { WeatherDataset } from '../shared/models/slickgrid/weather-dataset';
 import * as moment from 'moment';
+import { weatherColumns } from './weather-columns';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +18,7 @@ export class WeatherDataTableService implements SlickgridTableService<WeatherDat
   constructor(private api: ApiService) {}
 
   get columns(): Column[] {
-    return [
-      { id: 'date', name: 'Date', field: 'date', sortable: true, type: FieldType.dateTimeIsoAmPm },
-      { id: 'temperature', name: 'Temperature, °С', field: 'temperature', sortable: true, type: FieldType.number },
-      { id: 'humidity', name: 'Humidity, %', field: 'humidity', sortable: true, type: FieldType.number },
-      { id: 'pressure', name: 'Pressure, mm Hg', field: 'pressure', sortable: true, type: FieldType.number },
-      { id: 'description', name: 'Description', field: 'description' }
-    ];
+    return weatherColumns;
   }
 
   get config(): GridOption {
@@ -64,7 +59,7 @@ export class WeatherDataTableService implements SlickgridTableService<WeatherDat
           id,
           date: moment(weatherDay.date)
             .add(+item.time.slice(0, item.time.length - 2), 'hours')
-            .format('YYYY-MM-DD h:mm:ss a'),
+            .toDate(),
           temperature: +item.tempC,
           humidity: +item.humidity,
           pressure: +item.pressure,
