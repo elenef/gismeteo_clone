@@ -1,3 +1,11 @@
+<div class="form-group">
+  <label for="field1" class="col-sm-3 mb-2"></label>
+  <div class="form-group col-md-3">
+      <select class="form-control" [(ngModel)]="selectedOperator" (ngModelChange)="updateFilter()" name="select-time">
+          <option [value]="selectOption.id" *ngFor="let selectOption of selectOptions">{{selectOption.name}}</option>
+      </select>
+  </div>
+</div>
 <div *ngIf="dataset && dataset.length">
   <angular-slickgrid gridId="grid1"
             [columnDefinitions]="columnDefinitions"

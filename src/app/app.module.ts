@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularSlickgridModule } from 'angular-slickgrid';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { WeatherDataTableComponent } from './weather-data-table/weather-data-table.component';
@@ -22,6 +23,7 @@ import { BasicApiService } from './api/basic-api.service';
     HttpClientModule,
     AngularSlickgridModule.forRoot(),
     TranslateModule.forRoot(),
+    FormsModule,
   ],
   providers: [
     { provide: ApiService, useClass: BasicApiService },

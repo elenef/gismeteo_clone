@@ -10,6 +10,7 @@ import { SlickgridTableService } from '../shared/services/slickgrid-table.servic
 import { WeatherDataset } from '../shared/models/slickgrid/weather-dataset';
 import * as moment from 'moment';
 import { weatherColumns } from './weather-columns';
+import { SelectOption } from '../shared/models/select-option';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +30,20 @@ export class WeatherDataTableService implements SlickgridTableService<WeatherDat
     };
   }
 
-  public getDataset(): Observable<WeatherDataset[] | object> {
+  get selectOptions(): SelectOption[] {
+    return [
+      {id: 3, name: '3 часа'},
+      {id: 6, name: '6 часа'},
+      {id: 12, name: '12 часов'},
+      {id: 24, name: '24 часа'},
+    ];
+  }
+
+
+
+  public getDataset(interval = 3): Observable<WeatherDataset[] | object> {
     return new Observable(obs => {
-      this.getData().subscribe(
+      this.getData(interval).subscribe(
         ({ data }: WeatherResponse) => {
           const dataSet = this.getDatasetByRes(data.weather);
           obs.next(dataSet);
@@ -41,9 +53,9 @@ export class WeatherDataTableService implements SlickgridTableService<WeatherDat
     });
   }
 
-  private getData(): Observable<WeatherResponse | object> {
+  private getData(interval: number): Observable<WeatherResponse | object> {
     const httpParams = new HttpParams({
-      fromObject: { key: environment.key, q: 'London', format: 'json', num_of_days: '5' }
+      fromObject: { key: environment.key, q: 'London', format: 'json', num_of_days: '5', tp: `${interval}` }
     });
 
     const url = ApiEndpoints.weather().listUrl();
