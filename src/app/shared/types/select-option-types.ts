@@ -1,0 +1,1 @@
+export type IntervalType = '3' | '6' | '12' | '24';

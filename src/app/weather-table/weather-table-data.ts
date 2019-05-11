@@ -1,5 +1,6 @@
 import { Column, FieldType, Formatters, Filters} from 'angular-slickgrid';
-import { IntervalType, SelectOption } from '../shared/models/select-option';
+import { SelectOption } from '../shared/interfaces/models/select-option';
+import { IntervalType } from '../shared/types/select-option-types';
 
 /**
  * Конфигурация колонок таблицы погоды

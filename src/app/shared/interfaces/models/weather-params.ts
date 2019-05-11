@@ -1,4 +1,4 @@
-import { IntervalType } from './select-option';
+import { IntervalType } from '../../types/select-option-types';
 
 export interface WeatherParams {
     key: string;

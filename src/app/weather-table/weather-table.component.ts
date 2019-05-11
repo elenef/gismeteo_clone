@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Column, GridOption } from 'angular-slickgrid';
-import { WeatherData } from '../shared/models/slickgrid/weather-data';
-import { SelectOption, IntervalType } from '../shared/models/select-option';
+import { SelectOption } from '../shared/interfaces/models/select-option';
 import { WeatherTableService } from './weather-table.service';
-import { WeatherParams } from '../shared/models/weather-params';
+import { WeatherData } from '../shared/interfaces/models/weather-data';
+import { WeatherParams } from '../shared/interfaces/models/weather-params';
+import { IntervalType } from '../shared/types/select-option-types';
 
 @Component({
   selector: 'app-weather-table',
@@ -34,9 +35,15 @@ export class WeatherTableComponent implements OnInit {
     this.getDataset();
   }
 
+  /**
+   * Получить данные таблицы
+   */
   getDataset() {
-    this.service.getDataset(this.params).subscribe((dataset: WeatherData[]) => {
-      this.weatherTable.dataset = dataset;
-    });
+    this.service.getDataset(this.params).subscribe(
+      (dataset: WeatherData[]) => {
+        this.weatherTable.dataset = dataset;
+      },
+      error => alert(error.message)
+    );
   }
 }

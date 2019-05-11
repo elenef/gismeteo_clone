@@ -5,13 +5,14 @@ import { HttpParams } from '@angular/common/http';
 import { ApiEndpoints } from '../api/api-endpoints';
 import { Observable } from 'rxjs';
 import { GridOption, Column } from 'angular-slickgrid';
-import { SlickgridTableService } from '../shared/services/slickgrid-table.service';
-import { WeatherData } from '../shared/models/slickgrid/weather-data';
+import { SlickgridTableService } from '../shared/interfaces/services/slickgrid-table.service';
 import * as moment from 'moment';
-import { weatherColumns, intervalOptions } from './weather-data';
-import { SelectOption, IntervalType } from '../shared/models/select-option';
-import { WeatherParams } from '../shared/models/weather-params';
+import { weatherColumns, intervalOptions } from './weather-table-data';
+import { SelectOption } from '../shared/interfaces/models/select-option';
 import { environment } from 'src/environments/environment';
+import { WeatherData } from '../shared/interfaces/models/weather-data';
+import { WeatherParams } from '../shared/interfaces/models/weather-params';
+import { IntervalType } from '../shared/types/select-option-types';
 
 @Injectable({
   providedIn: 'root'
@@ -31,10 +32,16 @@ export class WeatherTableService implements SlickgridTableService<WeatherData, W
     };
   }
 
+  /**
+   * Все опции селекта интервала времени для данных погоды
+   */
   get intervalOptions(): SelectOption<IntervalType>[] {
     return intervalOptions;
   }
 
+  /**
+   * Все параметры запроса погоды
+   */
   get params(): WeatherParams {
     return {
       key: environment.key,
@@ -62,6 +69,10 @@ export class WeatherTableService implements SlickgridTableService<WeatherData, W
     });
   }
 
+  /**
+   *  Получить данные о погоде
+   *  @param params - параметры запроса погоды
+   */
   private getData(params?: WeatherParams): Observable<WeatherResponse | object> {
     const url = ApiEndpoints.weather().listUrl();
     const httpParams = new HttpParams({ fromObject: { ...params } });
@@ -69,6 +80,11 @@ export class WeatherTableService implements SlickgridTableService<WeatherData, W
     return this.api.get(url, httpParams);
   }
 
+  /**
+   *  Получить данные о погоде одного дня
+   *  @param weatherDay - погода дня
+   *  @param dayNumber - номер дня (по счету)
+   */
   private getDayDataset(weatherDay: WeatherElement, dayNumber: number): WeatherData[] {
     const dataset = [];
 
@@ -77,7 +93,7 @@ export class WeatherTableService implements SlickgridTableService<WeatherData, W
 
       dataset.push({
         id,
-        date: this.getHourlyDate(weatherDay.date, +item.time.slice(0, -2)), // time format: hmm
+        date: this.getHourlyDate(weatherDay.date, +item.time.slice(0, -2)), // формат времени: hmm
         temperature: +item.tempC,
         humidity: +item.humidity,
         pressure: +item.pressure,
@@ -88,6 +104,12 @@ export class WeatherTableService implements SlickgridTableService<WeatherData, W
     return dataset;
   }
 
+
+  /**
+   *  Получить дату конкретного часа погоды
+   *  @param date - дата
+   *  @param hours - количество прошедших часов от начала даты
+   */
   private getHourlyDate(date: string, hours: number): Date {
     return moment(date)
       .add(hours, 'hours')
