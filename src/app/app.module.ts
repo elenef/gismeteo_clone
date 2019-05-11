@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { ApiService } from './api/api.service';
 import { BasicApiService } from './api/basic-api.service';
 import { WeatherTableComponent } from './weather-table/weather-table.component';
+import { WeatherTableService } from './weather-table/weather-table.service';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { WeatherTableComponent } from './weather-table/weather-table.component';
   ],
   providers: [
     { provide: ApiService, useClass: BasicApiService },
+    WeatherTableService
   ],
   bootstrap: [AppComponent]
 })

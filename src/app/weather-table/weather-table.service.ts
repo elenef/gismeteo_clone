@@ -4,7 +4,7 @@ import { ApiService } from '../api/api.service';
 import { HttpParams } from '@angular/common/http';
 import { ApiEndpoints } from '../api/api-endpoints';
 import { Observable } from 'rxjs';
-import { Column, GridOption } from 'angular-slickgrid';
+import { GridOption, Column } from 'angular-slickgrid';
 import { SlickgridTableService } from '../shared/services/slickgrid-table.service';
 import { WeatherData } from '../shared/models/slickgrid/weather-data';
 import * as moment from 'moment';
