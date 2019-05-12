@@ -1,0 +1,39 @@
+:host {
+  display: grid;
+  grid-template-rows: 100px auto;
+  grid-template-columns: 300px 1fr;
+  grid-template-areas:
+    "form-control ..."
+    "table table";
+  grid-gap: 10px;
+  height: 100vh;
+
+  #table {
+    grid-area: table;
+  }
+
+  #form-control {
+    grid-area: form-control;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  >div {
+    padding: .5em 2em .5em .5em;
+  }
+}
+
+label {
+    margin-bottom: 0;
+}
+
+
+@media all and (max-width: 575px) {
+  :host {
+    grid-template-rows: 100px auto;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "form-control"
+      "table";
+  }
+}

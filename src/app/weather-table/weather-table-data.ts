@@ -10,7 +10,7 @@ export const weatherColumns: Column[] = [
     id: 'date',
     name: 'Date',
     field: 'date',
-    minWidth: 180,
+    minWidth: 170,
     sortable: true,
     type: FieldType.date,
     formatter: Formatters.dateTimeIsoAmPm,
@@ -48,7 +48,7 @@ export const weatherColumns: Column[] = [
     filterable: true,
     filter: { model: Filters.compoundInputNumber }
   },
-  { id: 'description', name: 'Description', field: 'description', minWidth: 250, filterable: true }
+  { id: 'description', name: 'Description', field: 'description', minWidth: 150, filterable: true }
 ];
 
 /**

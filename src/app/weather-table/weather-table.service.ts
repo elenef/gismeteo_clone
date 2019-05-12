@@ -28,7 +28,10 @@ export class WeatherTableService implements SlickgridTableService<WeatherData, W
     return {
       enableAutoResize: true,
       enableCellNavigation: true,
-      enableFiltering: true
+      enableFiltering: true,
+      autoResize: {
+        containerId: 'table'
+      }
     };
   }
 

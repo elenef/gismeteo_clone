@@ -1,12 +1,12 @@
-<div class="form-group">
-  <label for="field1" class="col-sm-3 mb-2">Задать интервал времени:</label>
-  <div class="form-group col-md-3">
+<div id="form-control">
+  <span for="field1">Задать интервал времени:</span>
+  <div>
       <select class="form-control" [(ngModel)]="params.tp" (ngModelChange)="getDataset()" name="select-time">
           <option [value]="intervalOption.id" *ngFor="let intervalOption of intervalOptions">{{intervalOption.displayedText}}</option>
       </select>
   </div>
 </div>
-<div class="col-12" *ngIf="weatherTable && weatherTable.dataset">
+<div id="table" *ngIf="weatherTable && weatherTable.dataset">
   <angular-slickgrid gridId="grid1"
             [columnDefinitions]="weatherTable.columns"
             [gridOptions]="weatherTable.gridOptions"
